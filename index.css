@@ -1,37 +1,115 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Helvetica, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
 body {
-    text-decoration: underline;
+    background-color: #342765;
+    color: white;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
 }
 
-p {
-    font-size: 200px;
-    
+.container {
+    max-width: 800px;
+    margin: 0 auto;
 }
 
-.test, .test2 {
-    font-family: Arial, Helvetica, sans-serif;
-    color: orange;
-    background-color: pink;
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: #efb02d;
+    text-transform: uppercase;
+    letter-spacing: 2px;
 }
 
-#element1 {
-    border: 20px solid black;
+h2 {
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+    color: #efb02d;
+}
+
+.coming-soon {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+}
+
+.loader {
+    width: 150px;
+    height: 4px;
+    background-color: rgba(255, 255, 255, 0.2);
+    margin: 30px auto;
+    position: relative;
+    overflow: hidden;
+    border-radius: 2px;
+}
+
+.loader::after {
+    content: '';
+    position: absolute;
+    width: 40%;
+    height: 100%;
+    background-color: #efb02d;
+    animation: loading 1.5s infinite ease-in-out;
+    border-radius: 2px;
+}
+
+@keyframes loading {
+    0% { left: -40%; }
+    100% { left: 100%; }
+}
+
+.contact {
+    margin-top: 2rem;
+    font-size: 1.1rem;
+}
+
+.contact a {
+    color: #efb02d;
     text-decoration: none;
+    transition: opacity 0.3s ease;
 }
 
-#element2 {
-    border: 20px dotted blue;
-    font-size: 400px;
+.contact a:hover {
+    opacity: 0.8;
 }
 
-p:hover {
-    background-color: orange;
-    color: pink;
+.hero-image {
+    margin: 2rem 0;
+    max-width: 100%;
+    overflow: hidden;
 }
 
-a {
-    font-size: 300px;
+.hero-image svg {
+    width: 100%;
+    height: 300px;
+    display: block;
 }
 
-p {
-    font-size: 1000px;
+.hero-image img,
+.hero-image svg {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+}
+
+@media (max-width: 600px) {
+    h1 {
+        font-size: 2rem;
+    }
+    h2 {
+        font-size: 1.5rem;
+    }
+    .coming-soon {
+        font-size: 1rem;
+    }
 }
