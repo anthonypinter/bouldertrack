@@ -31,8 +31,8 @@
 
         .hero-image {
             width: 100%;
-            height: 800px; /* Increased from 600px */
-            margin-top: 0; /* Removed margin since nav is transparent */
+            height: 800px;
+            margin-top: 0;
             object-fit: cover;
             object-position: center;
             display: block;
@@ -43,21 +43,13 @@
             padding: 4rem 0;
             background-color: var(--primary);
             color: white;
-            margin: 0; /* Remove margin to prevent overlap */
+            margin: 0;
         }
 
         .content-wrapper {
             max-width: 1200px;
             margin: 0 auto;
             padding: 2rem;
-        }
-
-        .hero-section {
-            text-align: center;
-            padding: 4rem 0;
-            background-color: var(--primary);
-            color: white;
-            margin: -2rem -2rem 2rem -2rem;
         }
 
         .hero-section h1 {
@@ -80,11 +72,13 @@
             color: var(--primary);
             font-size: 2rem;
             margin-bottom: 1.5rem;
+            text-align: center;
         }
 
         .content-section p {
             line-height: 1.6;
             margin-bottom: 1rem;
+            text-align: center;
         }
 
         .announcements {
@@ -169,7 +163,7 @@
         }
 
         .nav-item {
-            color: white; /* Changed from var(--primary) to white */
+            color: white;
             cursor: pointer;
             transition: all 0.3s ease;
             font-size: 1.3rem;
@@ -178,11 +172,11 @@
             position: relative;
             padding: 0.5rem 1rem;
             border-radius: 4px;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Added text shadow for better visibility */
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
 
         .nav-item:hover {
-            background-color: rgba(255, 255, 255, 0.2); /* Changed from var(--primary) to semi-transparent white */
+            background-color: rgba(255, 255, 255, 0.2);
             color: var(--accent);
         }
 
@@ -190,7 +184,7 @@
             position: absolute;
             top: 100%;
             left: 0;
-            background-color: rgba(52, 39, 101, 0.9); /* Semi-transparent primary color */
+            background-color: rgba(52, 39, 101, 0.9);
             min-width: 200px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             opacity: 0;
@@ -244,7 +238,6 @@
             color: var(--primary);
         }
 
-        /* Footer Styles */
         footer {
             position: fixed;
             bottom: 0;
@@ -260,8 +253,152 @@
             font-size: 0.9rem;
         }
 
-        footer.visible {
-            transform: translateY(0);
+        /* Base styles remain the same until here */
+
+        @media (max-width: 1024px) {
+            .nav-container {
+                gap: 1rem;
+                padding: 0 1rem;
+            }
+
+            .nav-item {
+                font-size: 1.1rem;
+            }
+
+            .logo-container {
+                width: 100px;
+                height: 100px;
+                margin-right: 1rem;
+            }
+
+            .nav-logo {
+                height: 100px;
+            }
+
+            .hero-image {
+                height: 600px;
+            }
+
+            .hero-section h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                justify-content: space-between;
+            }
+
+            .logo-container {
+                width: 75px;
+                height: 75px;
+            }
+
+            .nav-logo {
+                height: 75px;
+            }
+
+            nav.scrolled .logo-container {
+                width: 40px;
+                height: 40px;
+                margin-right: 1rem;
+            }
+
+            nav.scrolled .scrolled-logo {
+                height: 40px;
+            }
+
+            .hero-image {
+                height: 400px;
+            }
+
+            .hero-section h1 {
+                font-size: 2rem;
+            }
+
+            .hero-section p {
+                font-size: 1rem;
+            }
+
+            .content-section h2 {
+                font-size: 1.5rem;
+                text-align: center;
+            }
+
+            /* Mobile Menu */
+            .mobile-menu-button {
+                display: block;
+                color: white;
+                font-size: 1.5rem;
+                cursor: pointer;
+                z-index: 1001;
+            }
+
+            .nav-items-container {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                height: 100vh;
+                background-color: var(--primary);
+                padding: 2rem 1rem;
+                transition: right 0.3s ease;
+                overflow-y: auto;
+            }
+
+            .nav-items-container.active {
+                right: 0;
+            }
+
+            .nav-item {
+                display: block;
+                margin: 1rem 0;
+                font-size: 1.2rem;
+            }
+
+            .dropdown {
+                position: static;
+                background-color: transparent;
+                box-shadow: none;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                margin-left: 1rem;
+                display: none;
+            }
+
+            .nav-item.active .dropdown {
+                display: block;
+            }
+
+            .dropdown-item {
+                padding: 0.5rem 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-section h1 {
+                font-size: 1.5rem;
+            }
+
+            .content-wrapper {
+                padding: 1rem;
+            }
+
+            .content-section {
+                margin-bottom: 2rem;
+            }
+        }
+
+        /* Hide mobile elements by default */
+        .mobile-menu-button {
+            display: none;
+        }
+
+        .nav-items-container {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
         }
     </style>
 </head>
@@ -273,47 +410,51 @@
                 <img src="/assets/logos/logo-small.svg" alt="Boulder High School Track & Field Logo" class="nav-logo scrolled-logo">
             </a>
             
-            <div class="nav-item">
-                TEAM INFO
-                <div class="dropdown">
-                    <a href="https://docs.google.com/document/d/1kzl1ufylL74F8e0DPGNTbrsVTexl3WHiO2epDqjg8Mg/edit?usp=sharing" class="dropdown-item">TEAM POLICIES</a>
-                    <a href="https://docs.google.com/spreadsheets/d/12kOLRhShxpozu0u7ADnyWf9w6sradPa0UOylBKxr2Xc/edit?usp=sharing" class="dropdown-item">ROSTER</a>
-                    <a href="/teaminfo/practiceschedule.html" class="dropdown-item">PRACTICE SCHEDULE</a>
-                    <a href="/teaminfo/coaches.html" class="dropdown-item">COACHES</a>
-                </div>
-            </div>
+            <button class="mobile-menu-button">☰</button>
             
-            <div class="nav-item">
-                MEETS
-                <div class="dropdown">
-                    <a href="https://docs.google.com/spreadsheets/d/1vB5OzREIgGzkIi93CPq8Gjv0NMsuqB38tIMn6DuMe4k/edit?usp=sharing" class="dropdown-item">SCHEDULE</a>
-                    <a href="/meets/results.html" class="dropdown-item">RESULTS</a>
-                    <a href="https://docs.google.com/spreadsheets/d/1PBPAm7BK84B4vmArHAwRP1sL4I8XetV5pu2678IUYUc/edit?usp=sharing" class="dropdown-item">SEASON BESTS</a>
+            <div class="nav-items-container">
+                <div class="nav-item">
+                    TEAM INFO
+                    <div class="dropdown">
+                        <a href="https://docs.google.com/document/d/1kzl1ufylL74F8e0DPGNTbrsVTexl3WHiO2epDqjg8Mg/edit?usp=sharing" class="dropdown-item">TEAM POLICIES</a>
+                        <a href="https://docs.google.com/spreadsheets/d/12kOLRhShxpozu0u7ADnyWf9w6sradPa0UOylBKxr2Xc/edit?usp=sharing" class="dropdown-item">ROSTER</a>
+                        <a href="/teaminfo/practiceschedule.html" class="dropdown-item">PRACTICE SCHEDULE</a>
+                        <a href="/teaminfo/coaches.html" class="dropdown-item">COACHES</a>
+                    </div>
                 </div>
-            </div>
-            
-            <div class="nav-item">
-               PROGRAM HISTORY
-                <div class="dropdown">
-                    <a href="https://docs.google.com/spreadsheets/d/1xPID8oCLlmOdnT05Kl2bjmkDg9KIUbHP4JmFTLS5MsQ/edit?usp=sharing" class="dropdown-item">RECORDS & TOP 10 LISTS</a>
-                    <a href="/programhistory/programhistory.html" class="dropdown-item">PROGRAM HISTORY</a>
+                
+                <div class="nav-item">
+                    MEETS
+                    <div class="dropdown">
+                        <a href="https://docs.google.com/spreadsheets/d/1vB5OzREIgGzkIi93CPq8Gjv0NMsuqB38tIMn6DuMe4k/edit?usp=sharing" class="dropdown-item">SCHEDULE</a>
+                        <a href="/meets/results.html" class="dropdown-item">RESULTS</a>
+                        <a href="https://docs.google.com/spreadsheets/d/1PBPAm7BK84B4vmArHAwRP1sL4I8XetV5pu2678IUYUc/edit?usp=sharing" class="dropdown-item">SEASON BESTS</a>
+                    </div>
                 </div>
-            </div>
+                
+                <div class="nav-item">
+                   PROGRAM HISTORY
+                    <div class="dropdown">
+                        <a href="https://docs.google.com/spreadsheets/d/1xPID8oCLlmOdnT05Kl2bjmkDg9KIUbHP4JmFTLS5MsQ/edit?usp=sharing" class="dropdown-item">RECORDS & TOP 10 LISTS</a>
+                        <a href="/programhistory/programhistory.html" class="dropdown-item">PROGRAM HISTORY</a>
+                    </div>
+                </div>
 
-            <div class="nav-item">
-                SUPPORT
-                 <div class="dropdown">
-                     <a href="/support/fundraising.html" class="dropdown-item">FUNDRAISING</a>
-                     <a href="/support/sponsorship.html" class="dropdown-item">SPONSORSHIP</a>
-                     <a href="/support/donations.html" class="dropdown-item">DONATIONS</a>
+                <div class="nav-item">
+                    SUPPORT
+                     <div class="dropdown">
+                         <a href="/support/fundraising.html" class="dropdown-item">FUNDRAISING</a>
+                         <a href="/support/sponsorship.html" class="dropdown-item">SPONSORSHIP</a>
+                         <a href="/support/donations.html" class="dropdown-item">DONATIONS</a>
+                     </div>
                  </div>
-             </div>
-            
-            <div class="nav-item">
-                CONTACT
-                <div class="dropdown">
-                    <a href="#" class="dropdown-item">JOIN OUR MAILING LIST</a>
-                    <a href="https://www.instagram.com/bouldertrackandfield/" class="dropdown-item">BHSTF INSTAGRAM</a>
+                
+                <div class="nav-item">
+                    CONTACT
+                    <div class="dropdown">
+                        <a href="#" class="dropdown-item">JOIN OUR MAILING LIST</a>
+                        <a href="https://www.instagram.com/bouldertrackandfield/" class="dropdown-item">BHSTF INSTAGRAM</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -353,24 +494,56 @@
     </footer>
 
     <script>
-        // Navbar scroll handling
         window.addEventListener('scroll', () => {
             const nav = document.querySelector('nav');
             const footer = document.querySelector('footer');
             
-            // Handle navbar
             if (window.scrollY > 50) {
                 nav.classList.add('scrolled');
             } else {
                 nav.classList.remove('scrolled');
             }
             
-            // Handle footer
-            // Show footer when near bottom (100px from bottom)
             if ((window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight - 100) {
                 footer.classList.add('visible');
             } else {
                 footer.classList.remove('visible');
+            }
+        });
+
+        // Mobile menu handling
+        const mobileMenuButton = document.querySelector('.mobile-menu-button');
+        const navItemsContainer = document.querySelector('.nav-items-container');
+        const navItems = document.querySelectorAll('.nav-item');
+
+        mobileMenuButton.addEventListener('click', () => {
+            navItemsContainer.classList.toggle('active');
+            mobileMenuButton.textContent = navItemsContainer.classList.contains('active') ? '✕' : '☰';
+        });
+
+        // Handle mobile dropdown toggles
+        navItems.forEach(item => {
+            item.addEventListener('click', (e) => {
+                if (window.innerWidth <= 768) {
+                    const clickedItem = e.currentTarget;
+                    navItems.forEach(otherItem => {
+                        if (otherItem !== clickedItem) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                    clickedItem.classList.toggle('active');
+                }
+            });
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (window.innerWidth <= 768 && 
+                !e.target.closest('.nav-items-container') && 
+                !e.target.closest('.mobile-menu-button')) {
+                navItemsContainer.classList.remove('active');
+                mobileMenuButton.textContent = '☰';
+                navItems.forEach(item => item.classList.remove('active'));
             }
         });
     </script>
