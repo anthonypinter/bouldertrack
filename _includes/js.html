@@ -1,0 +1,104 @@
+<script>
+window.addEventListener('scroll', () => {
+    const nav = document.querySelector('nav');
+    const footer = document.querySelector('footer');
+    
+    if (window.scrollY > 50) {
+        nav.classList.add('scrolled');
+    } else {
+        nav.classList.remove('scrolled');
+    }
+    
+    if ((window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight - 100) {
+        footer.classList.add('visible');
+    } else {
+        footer.classList.remove('visible');
+    }
+});
+
+// Mobile menu functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const mobileMenuButton = document.querySelector('.mobile-menu-button');
+    const navItemsContainer = document.querySelector('.nav-items-container');
+    const navItems = document.querySelectorAll('.nav-item');
+    
+    // Toggle mobile menu
+    mobileMenuButton.addEventListener('click', (e) => {
+        e.stopPropagation();
+        navItemsContainer.classList.toggle('active');
+        // mobileMenuButton.textContent = navItemsContainer.classList.contains('active') ? '✕' : '☰';
+    });
+    
+    // Toggle dropdowns in mobile view
+    navItems.forEach(item => {
+        item.addEventListener('click', (e) => {
+            if (window.innerWidth <= 768) {
+                // Only execute if we're clicking the actual nav item, not a child
+                if (e.target === item || e.target === item.firstChild || 
+                    (e.target.nodeType === Node.TEXT_NODE && e.target.parentNode === item)) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    // Check if this item already has active class
+                    const isActive = item.classList.contains('active');
+                    
+                    // Close all dropdowns first
+                    navItems.forEach(navItem => {
+                        if (navItem !== item) {
+                            navItem.classList.remove('active');
+                        }
+                    });
+                    
+                    // Toggle active class on clicked item
+                    if (isActive) {
+                        item.classList.remove('active');
+                    } else {
+                        item.classList.add('active');
+                    }
+                }
+            }
+        });
+    });
+    
+    // Allow dropdown links to work without closing menu
+    const dropdownItems = document.querySelectorAll('.dropdown-item');
+    dropdownItems.forEach(item => {
+        item.addEventListener('click', (e) => {
+            // Don't stop propagation to allow normal link behavior
+            if (window.innerWidth <= 768) {
+                // Close the mobile menu after clicking a link
+                setTimeout(() => {
+                    navItemsContainer.classList.remove('active');
+                    // Keep hamburger icon
+                    mobileMenuButton.textContent = '☰';
+                    navItems.forEach(navItem => navItem.classList.remove('active'));
+                }, 300);
+            }
+        });
+    });
+    
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', (e) => {
+        if (window.innerWidth <= 768 && 
+            navItemsContainer.classList.contains('active') &&
+            !e.target.closest('.nav-items-container') && 
+            !e.target.closest('.mobile-menu-button')) {
+            navItemsContainer.classList.remove('active');
+            // Keep hamburger icon
+            mobileMenuButton.textContent = '☰';
+            navItems.forEach(item => item.classList.remove('active'));
+        }
+    });
+    
+    // Handle resize events
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 768) {
+            // Reset mobile menu state when resizing to larger screens
+            navItemsContainer.classList.remove('active');
+            // Keep hamburger icon
+            mobileMenuButton.textContent = '☰';
+            navItems.forEach(item => item.classList.remove('active'));
+        }
+    });
+});
+</script>
