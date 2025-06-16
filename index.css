@@ -12,11 +12,11 @@
       }
 
       a {
-        color: --primary;
+        color: var(--primary);
       }
 
       a:hover {
-        color: --accent;
+        color: var(--accent);
       }
 
       body {
